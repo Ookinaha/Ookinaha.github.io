@@ -1,0 +1,464 @@
+/* ==========================================================================
+   CV Template - Modern Professional Japanese-Inspired Style
+   Thiết kế CV chuẩn cho Giang Tỷ (TP.HCM)
+   ========================================================================== */
+
+:root {
+  --primary-color: #164356;       /* Xanh cổ vịt / Navy trầm cho tiêu đề */
+  --secondary-color: #553a79;     /* Tím signature cho biểu tượng và điểm nhấn */
+  --text-dark: #1f2937;           /* Chữ chính */
+  --text-muted: #4b6473;          /* Phụ đề và dòng thời gian */
+  --text-body: #374151;           /* Nội dung danh sách và đoạn văn */
+  --quote-color: #943542;         /* Đỏ burgundy cho dấu ngoặc kép trích dẫn */
+  --bg-page: #ffffff;             /* Trang giấy trắng */
+  --bg-body: #eceff3;             /* Nền xám nhạt khi xem trên màn hình */
+  --pastel-blob-1: rgba(228, 226, 248, 0.75);
+  --pastel-blob-2: rgba(238, 236, 252, 0.85);
+  --border-color: #e2e8f0;
+  --line-color: #164356;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-dark);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 24px 15px 40px;
+}
+
+/* ==========================================================================
+   CV Sheet Container (Tỉ lệ chuẩn A4)
+   ========================================================================== */
+.cv-container {
+  display: flex;
+  justify-content: center;
+}
+
+.cv-sheet {
+  position: relative;
+  width: 820px;
+  min-height: 1160px;
+  background-color: var(--bg-page);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 38px 44px 40px;
+}
+
+/* Dải viền màu gradient trên cùng theo mẫu template */
+.top-accent-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #d48b64 0%, #ba6378 28%, #785a9f 65%, #3f6888 100%);
+  z-index: 2;
+}
+
+/* Họa tiết nền Pastel mềm mại theo mẫu template */
+.bg-blob-top-right {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 480px;
+  height: 440px;
+  background: radial-gradient(circle at 65% 35%, var(--pastel-blob-1) 0%, var(--pastel-blob-2) 45%, transparent 75%);
+  border-radius: 42% 58% 68% 32% / 45% 42% 58% 55%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-blob-bottom-right {
+  position: absolute;
+  bottom: 60px;
+  right: -80px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, var(--pastel-blob-1) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.bg-blob-bottom-left {
+  position: absolute;
+  bottom: -40px;
+  left: -40px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, var(--pastel-blob-2) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+/* ==========================================================================
+   Header Section (Ảnh đại diện + Tên + Mục tiêu)
+   ========================================================================== */
+.cv-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.avatar-wrapper {
+  position: relative;
+  width: 140px;
+  height: 180px;
+  flex-shrink: 0;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background-color: #f8fafc;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.header-main {
+  flex: 1;
+  padding-top: 2px;
+}
+
+.candidate-name {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--primary-color);
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  margin-bottom: 3px;
+}
+
+.candidate-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+  margin-bottom: 8px;
+}
+
+.quote-icon {
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 38px;
+  font-weight: 900;
+  line-height: 0.8;
+  color: var(--quote-color);
+  margin-bottom: 6px;
+  user-select: none;
+}
+
+.candidate-summary {
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--text-body);
+  text-align: justify;
+}
+
+/* ==========================================================================
+   CV Body Bố cục 2 cột
+   ========================================================================== */
+.cv-body {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 245px 1fr;
+  gap: 36px;
+}
+
+/* Tiêu đề mục (Section Titles) */
+.section-title {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--primary-color);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  padding-bottom: 4px;
+  border-bottom: 1.5px solid var(--line-color);
+  margin-bottom: 14px;
+}
+
+.main-column .section-title {
+  font-size: 15px;
+  border-bottom: 2px solid var(--line-color);
+  margin-bottom: 15px;
+}
+
+/* Cột trái */
+.side-column .cv-section {
+  margin-bottom: 22px;
+}
+
+/* Danh sách liên hệ */
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.contact-icon-box {
+  width: 28px;
+  height: 28px;
+  background-color: var(--secondary-color);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+  box-shadow: 0 2px 5px rgba(85, 58, 121, 0.25);
+}
+
+.contact-icon-box svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+}
+
+.contact-detail {
+  font-size: 12px;
+  color: var(--text-dark);
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.contact-detail a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.contact-detail a:hover {
+  text-decoration: underline;
+  color: var(--primary-color);
+}
+
+/* Danh sách kỹ năng */
+.skills-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skills-list li {
+  position: relative;
+  padding-left: 15px;
+  font-size: 12.3px;
+  color: var(--text-body);
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.skills-list li::before {
+  content: "◆";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 9px;
+  color: var(--secondary-color);
+}
+
+/* Mong muốn phát triển */
+.growth-goals {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.growth-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.growth-item-label {
+  font-size: 12.3px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.growth-item-desc {
+  font-size: 11.8px;
+  color: var(--text-body);
+  line-height: 1.5;
+  text-align: justify;
+}
+
+/* Sở thích */
+.hobbies-content {
+  font-size: 12px;
+  color: var(--text-body);
+  line-height: 1.55;
+  text-align: justify;
+}
+
+/* ==========================================================================
+   Cột phải (Main Column)
+   ========================================================================== */
+.main-column .cv-section {
+  margin-bottom: 24px;
+}
+
+.timeline-entry {
+  margin-bottom: 20px;
+}
+
+.timeline-entry:last-child {
+  margin-bottom: 0;
+}
+
+.entry-header {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.entry-bullet {
+  color: var(--primary-color);
+  font-size: 11px;
+  line-height: 1;
+}
+
+.entry-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.entry-meta {
+  font-size: 12.2px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-left: 18px;
+  margin-bottom: 7px;
+}
+
+.entry-meta-divider {
+  margin: 0 6px;
+  color: #94a3b8;
+}
+
+.entry-desc-list {
+  list-style: none;
+  padding-left: 18px;
+}
+
+.entry-desc-list li {
+  position: relative;
+  padding-left: 14px;
+  font-size: 12.3px;
+  line-height: 1.65;
+  color: var(--text-body);
+  margin-bottom: 5px;
+  text-align: justify;
+}
+
+.entry-desc-list li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Responsive View cho màn hình nhỏ (< 860px)
+   ========================================================================== */
+@media screen and (max-width: 860px) {
+  body {
+    padding: 15px 10px;
+  }
+
+  .cv-sheet {
+    width: 100%;
+    min-height: auto;
+    padding: 25px 20px;
+  }
+
+  .cv-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .header-main {
+    text-align: center;
+  }
+
+  .candidate-summary {
+    text-align: left;
+  }
+
+  .cv-body {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* ==========================================================================
+   In ấn chuẩn trang giấy A4 (Khi nhấn Ctrl + P)
+   ========================================================================== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 14mm;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .cv-container {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+
+  .cv-sheet {
+    width: 100% !important;
+    min-height: auto !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 10px 0 0 0 !important;
+    margin: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .timeline-entry,
+  .cv-section {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}
